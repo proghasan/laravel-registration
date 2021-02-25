@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("user-registration", [AppController::class, 'registration']);
 Route::post("login", [AppController::class, 'login']);
+
+Route::post("registration", [RegistrationController::class, 'save']);
+
 Route::group(['middleware' => ['AuthJwt']], function(){
     Route::get('logout', [AppController::class, 'logout']);
 
