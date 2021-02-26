@@ -17,7 +17,7 @@ class CreateTrainingsTable extends Migration
             $table->id();
             $table->integer('registration_id');
             $table->string('name');
-            $table->string('details');
+            $table->string('description');
             $table->timestamps();
         });
     }
