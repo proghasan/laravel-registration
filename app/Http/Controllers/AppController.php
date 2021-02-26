@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\UserRegistrationRequest;
 use App\Repository\UserRepositoryInterface;
 
 class AppController extends Controller
@@ -15,7 +15,7 @@ class AppController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function registration(RegistrationRequest $request)
+    public function registration(UserRegistrationRequest $request)
     {
         $response = $this->userRepo->save($request->all());
         return response()->json(['message'=>$response->message], $response->status);

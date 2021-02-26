@@ -20,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::post("user-registration", [AppController::class, 'registration']);
 Route::post("login", [AppController::class, 'login']);
 
-Route::post("registration", [RegistrationController::class, 'save']);
+Route::post("save_registration", [RegistrationController::class, 'save']);
+Route::get("get_divisions", [RegistrationController::class, 'getDivisions']);
+Route::post("get_districts", [RegistrationController::class, 'getDistricts']);
+Route::post("get_upazilas", [RegistrationController::class, 'getUpailas']);
 
 Route::group(['middleware' => ['AuthJwt']], function(){
     Route::get('logout', [AppController::class, 'logout']);
-
-    
     Route::get("check-auth", function(){ return true;});
+    
 });

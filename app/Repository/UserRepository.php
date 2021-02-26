@@ -7,7 +7,8 @@ use stdClass;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class UserRepository implements UserRepositoryInterface{
+class UserRepository implements UserRepositoryInterface
+{
 
     public function login($request)
     {

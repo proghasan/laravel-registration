@@ -15,6 +15,15 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->integer('division_id');
+            $table->integer('district_id');
+            $table->integer('upazila_id');
+            $table->string('address_details');
+            $table->string('photo');
+            $table->string('cv');
+            $table->string('training');
             $table->timestamps();
         });
     }

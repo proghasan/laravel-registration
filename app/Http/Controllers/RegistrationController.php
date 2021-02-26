@@ -2,23 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
+use App\Repository\RegistrationRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
-    public function save(Request $request)
+    private $registrationRepo;
+    public function __construct(RegistrationRepositoryInterface $registrationRepo)
     {
-        $validation = Validator::make($request->all(), [
-            "training" => "required",
-            "trainings.*.name" => 'required_if:training,Yes',
-            "trainings.*.description" => 'required_if:training,Yes'
-        ]);
+        $this->registrationRepo = $registrationRepo;
+    }
+    public function save(RegistrationRequest $request)
+    {
 
-        if($validation->fails()){
-            return response()->json(['message' => $validation->errors()->all()], 422);
-        }
+        return response()->json(['message' => $request->all()], 200);
+    }
 
-        return response()->json($request->trainings);
+    public function getDivisions()
+    {
+        $divisions = $this->registrationRepo->getDivisions();
+        return response()->json(['divisions' => $divisions], 200);
+    }
+
+    public function getDistricts(Request $request)
+    {
+        $districts = $this->registrationRepo->getDistricts($request->all());
+        return response()->json(['districts' => $districts], 200);
+    }
+
+    public function getUpailas(Request $request)
+    {
+        $upazilas = $this->registrationRepo->getUpazilas($request->all());
+        return response()->json(['upazilas' => $upazilas], 200);
     }
 }
