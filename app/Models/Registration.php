@@ -25,4 +25,19 @@ class Registration extends Model
     {
         return $this->hasMany(Training::class);
     }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function upazila()
+    {
+        return $this->belongsTo(Upazila::class);
+    }
 }

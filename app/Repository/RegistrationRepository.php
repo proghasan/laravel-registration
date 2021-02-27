@@ -167,9 +167,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
     {
         $res = new stdClass;
         try{
-            $query = Registration::with(['educations'=> function($query) {
-               return $query->select(['id','exam_name','board_name', 'university_name', 'result','registration_id']);
-            }, 'trainings']);
+            $query = Registration::with(['educations','trainings','division', 'district', 'upazila']);
 
             if(isset($request['name']) && $request['name'] != "" && $request['name'] != null) {
                 $query->where('name', 'LIKE', '%'.$request['name'].'%');
