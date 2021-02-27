@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("user-registration", [AppController::class, 'registration']);
+Route::post("user_registration", [AppController::class, 'registration']);
 Route::post("login", [AppController::class, 'login']);
 
 Route::post("save_registration", [RegistrationController::class, 'save']);
