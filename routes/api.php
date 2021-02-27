@@ -29,4 +29,11 @@ Route::group(['middleware' => ['AuthJwt']], function(){
     Route::get('logout', [AppController::class, 'logout']);
     Route::get("check-auth", function(){ return true;});
     
+    // get all registrations
+
+    /*
+    *   get all registrations 
+    *   & also filter with customer request
+    */
+    Route::post("get_registration", [RegistrationController::class, 'get']);
 });

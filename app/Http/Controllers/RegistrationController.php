@@ -50,6 +50,12 @@ class RegistrationController extends Controller
         return response()->json(['message' => $response->message], $response->status);
     }
 
+    public function get(Request $request)
+    {
+        $response = $this->registrationRepo->get($request->all());
+        return response()->json(['registrations' => $response->registrations], $response->status);
+    }
+
     public function getDivisions()
     {
         $divisions = $this->registrationRepo->getDivisions();

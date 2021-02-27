@@ -78,8 +78,12 @@ class RegistrationRepository implements RegistrationRepositoryInterface
             $res->message = $e->getMessage();
             $res->status = 422;
         }
-
         return $res;
+    }
+
+    public function get($request)
+    {
+
     }
 
     public function getDivisions()
