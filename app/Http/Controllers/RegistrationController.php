@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationRequest;
+use App\Models\Registration;
 use App\Repository\RegistrationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -66,5 +67,12 @@ class RegistrationController extends Controller
     {
         $upazilas = $this->registrationRepo->getUpazilas($request->all());
         return response()->json(['upazilas' => $upazilas], 200);
+    }
+
+    public function get(Request $request)
+    {
+
+        $response = $this->registrationRepo->get($request->all());
+        return response()->json(['registrations' => $response->data], $response->status);
     }
 }

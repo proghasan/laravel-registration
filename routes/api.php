@@ -23,7 +23,9 @@ Route::post("login", [AppController::class, 'login']);
 Route::post("save_registration", [RegistrationController::class, 'save']);
 Route::get("get_divisions", [RegistrationController::class, 'getDivisions']);
 Route::post("get_districts", [RegistrationController::class, 'getDistricts']);
-Route::post("get_upazilas", [RegistrationController::class, 'getUpailas']);
+Route::post("get_upazilas", [RegistrationController::class, 'get']);
+
+Route::post("get_registration", [RegistrationController::class, 'get']);
 
 Route::group(['middleware' => ['AuthJwt']], function(){
     Route::get('logout', [AppController::class, 'logout']);
