@@ -21,7 +21,7 @@ class UserRepository implements UserRepositoryInterface
 
             if (! $token = JWTAuth::attempt($credentials)) {
                 $res->message =  "Email or password incorrect";
-                $res->status = 404;
+                $res->status = 422;
                 return $res;
             }
         } catch (JWTException $e) {
