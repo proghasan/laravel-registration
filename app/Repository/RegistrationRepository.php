@@ -110,4 +110,24 @@ class RegistrationRepository implements RegistrationRepositoryInterface
         return $upazilas;
     }
 
+    public function get($request)
+    {
+        $res = new stdClass;
+        try{
+            $registrations = Registration::with(['educations'=> function($query) {
+               return $query->select(['id','exam_name','board_name', 'university_name', 'result','registration_id']);
+            }, 'languages', 'trainings'])
+                ->get();
+
+            $res->data = $registrations;
+            $res->status = 200;
+
+        }catch(\Exception $e){
+            $res->data = [];
+            $res->status = 422;
+        }
+
+        return $res;
+    }
+
 }
