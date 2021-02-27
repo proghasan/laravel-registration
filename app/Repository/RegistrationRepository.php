@@ -21,12 +21,12 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 $photo = null;
                 if(isset($request['photo'])){
                     $photo =  time().'.'.$request['photo']->getClientOriginalName();
-                    request()->photo->move(public_path('photo'), $photo);
+                    request()->photo->move(public_path('photos'), $photo);
                 }
                 $cv = null;
                 if(isset($request['cv'])){
                     $cv =  time().'.'.$request['cv']->getClientOriginalName();
-                    request()->cv->move(public_path('cv'), $cv);
+                    request()->cv->move(public_path('cvs'), $cv);
                 }
                 //registration 
                 $registration = new Registration();
@@ -83,15 +83,23 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 
                 $photo = null;
                 if(isset($request['photo']) && $request['photo'] != null && $request['photo'] != ""){
+                    if(file_exists('photos/'.$registration->photo)){
+                        @unlink('photos/'.$registration->photo);
+                    }
+                    
                     $photo =  time().'.'.$request['photo']->getClientOriginalName();
-                    request()->photo->move(public_path('photo'), $photo);
+                    request()->photo->move(public_path('photos'), $photo);
 
                     $registration->photo = $photo;
                 }
                 $cv = null;
                 if(isset($request['cv']) && $request['cv'] != null && $request['cv'] != ""){
+                    if(file_exists('cvs/'.$registration->cv)){
+                        @unlink('cvs/'.$registration->cv);
+                    }
+
                     $cv =  time().'.'.$request['cv']->getClientOriginalName();
-                    request()->cv->move(public_path('cv'), $cv);
+                    request()->cv->move(public_path('cvs'), $cv);
                     $registration->cv = $cv;
                 }
                 
@@ -109,7 +117,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 // delete to delete if have training before
                 if($request['training'] == 'Yes') {
                     foreach($request['trainings'] as $training){
-                        $trainingObj = new Training();
+                        $trainingObj = Training::findOrNew($training['id']);
                         $trainingObj->registration_id = $registration->id;
                         $trainingObj->name = $training['name'];
                         $trainingObj->description = $training['description'];
