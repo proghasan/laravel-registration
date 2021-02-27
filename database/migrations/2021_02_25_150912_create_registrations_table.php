@@ -24,6 +24,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('photo');
             $table->string('cv');
             $table->string('training');
+            $table->json('languages');
             $table->timestamps();
         });
     }

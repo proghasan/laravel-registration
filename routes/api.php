@@ -23,19 +23,25 @@ Route::post("login", [AppController::class, 'login']);
 Route::post("save_registration", [RegistrationController::class, 'save']);
 Route::get("get_divisions", [RegistrationController::class, 'getDivisions']);
 Route::post("get_districts", [RegistrationController::class, 'getDistricts']);
-Route::post("get_upazilas", [RegistrationController::class, 'get']);
+Route::post("get_upazilas", [RegistrationController::class, 'getUpazilas']);
 
-Route::post("get_registration", [RegistrationController::class, 'get']);
 
 Route::group(['middleware' => ['AuthJwt']], function(){
     Route::get('logout', [AppController::class, 'logout']);
     Route::get("check-auth", function(){ return true;});
     
     // get all registrations
-
+    
     /*
     *   get all registrations 
     *   & also filter with customer request
     */
-    Route::post("get_registration", [RegistrationController::class, 'get']);
+    Route::post("get_applications", [RegistrationController::class, 'getApplications']);
+    Route::post("get_application", [RegistrationController::class, 'getApplication']);
+    
+    Route::post("delete_education", [RegistrationController::class, 'deleteEducation']);
+    Route::post("delete_training", [RegistrationController::class, 'deleteTraining']);
+
+    //  update registration form
+    Route::post("update_registration", [RegistrationController::class, 'update']);
 });
